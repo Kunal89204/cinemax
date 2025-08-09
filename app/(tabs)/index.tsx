@@ -1,10 +1,13 @@
-import { View, Text } from "react-native";
+import { View, Text, Image } from "react-native";
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import userRequests from "@/apis/userRequests";
 import { useStore } from "@/context/store";
+import { Ionicons } from "@expo/vector-icons";
+import HeaderProfile from "@/components/home/HeaderProfile";
+import SearchBar from "@/components/home/SearchBar";
 
-const Homeyyy = () => {
+const Home = () => {
   const sessionId = useStore((s) => s.sessionId);
 
   const { data, isLoading, isError, error } = useQuery({
@@ -23,12 +26,11 @@ const Homeyyy = () => {
   }
 
   return (
-    <View className="flex-1 bg-[#1F1D2B] items-center justify-center">
-      <Text className="text-white text-2xl font-bold">
-        {data.username}
-      </Text>
+    <View className="flex-1 bg-[#1F1D2B]">
+      <HeaderProfile data={data} />
+      <SearchBar />
     </View>
   );
 };
 
-export default Homeyyy;
+export default Home;

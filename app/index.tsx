@@ -1,4 +1,3 @@
-import { View, Text } from "react-native";
 import { useEffect } from "react";
 import { router } from "expo-router";
 import { useStore } from "@/context/store";
@@ -6,27 +5,20 @@ import { useStore } from "@/context/store";
 export default function Index() {
   const loadSessionId = useStore((s) => s.loadSessionId);
   const sessionId = useStore((s) => s.sessionId);
+  const isSessionLoading = useStore((s) => s.isSessionLoading);
 
+  // Load session on mount
   useEffect(() => {
-    const init = async () => {
-      await loadSessionId();
-    };
-    init();
+    loadSessionId();
   }, []);
 
+  // Redirect when session state changes
   useEffect(() => {
-    if (sessionId !== null) {
-      if (sessionId) {
-        router.replace("/(tabs)"); // logged in
-      } else {
-        router.replace("/auth/login"); // not logged in
-      }
+    if (!isSessionLoading) {
+      router.replace(sessionId ? "/(tabs)" : "/auth/login");
     }
-  }, [sessionId]);
+  }, [sessionId, isSessionLoading]);
 
-  return (
-    <View>
-      <Text>Loading...</Text>
-    </View>
-  );
+  // Render nothing — this acts as a redirect screen
+  return null;
 }

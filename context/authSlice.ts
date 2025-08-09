@@ -1,8 +1,8 @@
 import { StateCreator } from "zustand";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
 export interface AuthSlice {
   sessionId: string | null;
+  isSessionLoading: boolean;
   loadSessionId: () => Promise<void>;
   setSessionId: (id: string) => Promise<void>;
   clearSessionId: () => Promise<void>;
@@ -10,10 +10,12 @@ export interface AuthSlice {
 
 export const createAuthSlice: StateCreator<AuthSlice> = (set) => ({
   sessionId: null,
+  isSessionLoading: true, // New flag
 
   loadSessionId: async () => {
+    set({ isSessionLoading: true });
     const storedId = await AsyncStorage.getItem("session_id");
-    set({ sessionId: storedId });
+    set({ sessionId: storedId, isSessionLoading: false });
   },
 
   setSessionId: async (id) => {
@@ -26,3 +28,4 @@ export const createAuthSlice: StateCreator<AuthSlice> = (set) => ({
     set({ sessionId: null });
   },
 });
+
