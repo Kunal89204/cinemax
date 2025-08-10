@@ -14,15 +14,17 @@ const HeaderProfile = ({ data }: { data: IAccountDetails }) => {
           justifyContent: "space-between",
           gap: 10,
           padding: 16,
-          paddingHorizontal: 24,
+          paddingHorizontal: 20,
         }}
       >
-        <View style={{
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "flex-start",
-          gap: 10,
-        }}>
+        <View
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "flex-start",
+            gap: 10,
+          }}
+        >
           <Image
             source={{
               uri: `https://image.tmdb.org/t/p/w500${data?.avatar?.tmdb?.avatar_path}`,
@@ -31,17 +33,21 @@ const HeaderProfile = ({ data }: { data: IAccountDetails }) => {
             style={{ width: 40, height: 40, borderRadius: 100 }}
           />
           <View>
-            <Text style={{
-              color: "white",
-              fontSize: 16,
-              fontWeight: "bold"
-            }}>
+            <Text
+              style={{
+                color: "white",
+                fontSize: 16,
+                fontWeight: "bold",
+              }}
+            >
               Hello, {data.username}
             </Text>
-            <Text style={{
-              color: "#92929D",
-              fontSize: 14
-            }}>
+            <Text
+              style={{
+                color: "#92929D",
+                fontSize: 14,
+              }}
+            >
               Let's stream your favorite movie
             </Text>
           </View>
@@ -53,7 +59,7 @@ const HeaderProfile = ({ data }: { data: IAccountDetails }) => {
           backgroundColor="#242632"
           style={{
             borderRadius: 6,
-            padding: 4
+            padding: 4,
           }}
         />
       </View>
